@@ -126,7 +126,8 @@ Defaults to \"output/\" and should only be changed with
   :type 'boolean)
 
 (defcustom psc-ide-add-qualification-on-completion t
-  "Whether to automatically prepend the qualifier for completions that are imported qualified in the current module."
+  "Whether to automatically prepend the qualifier for completions that are
+imported qualified in the current module."
   :group 'psc-ide
   :type 'boolean)
 
@@ -157,7 +158,8 @@ files."
   '("js")
   "Codegen used for compilation.
 Specified the codegen targets the rebuild should produce.
-Uses the same target names as the command line compiler. Defaults to just JS output"
+Uses the same target names as the command line compiler. Defaults to
+just JS output"
   :group 'psc-ide
   :type '(repeat string))
 
@@ -250,7 +252,8 @@ COMMAND, ARG and IGNORED correspond to the standard company backend API."
      (_ (inheritenv (psc-ide-server-use-package-manager-globs))))))
 
 (defun psc-ide-server-use-package-manager-globs ()
-  "Detects bower, psc-package and spago projects and determines sensible source globs."
+  "Detects bower, psc-package and spago projects and determines sensible
+source globs."
   (pcase (seq-filter 'file-exists-p '("psc-package.json" "bower.json" "spago.dhall" "spago.yaml"))
     ('()
      (message "Couldn't find psc-package.json, bower.json nor spago.dhall files, using just the user specified globs.")
@@ -291,7 +294,8 @@ COMMAND, ARG and IGNORED correspond to the standard company backend API."
 (defun psc-ide--parse-globs (results errors cmd-alist)
   "Return the globs printed by a command.
 RESULTS and ERRORS are buffer names.
-CMD-ALIST is a command name and its arguments, e.g. ((\"cmd\" . \"psc-package\") (\"args\" . (\"sources\")))"
+CMD-ALIST is a command name and its arguments, e.g. ((\"cmd\" .
+\"psc-package\") (\"args\" . (\"sources\")))"
   (let* (server-globs (err-file (make-temp-file "psc-ide-globs"))
         (cmd  (cdr (assoc "cmd" cmd-alist)))
         (cmd-args (cdr (assoc "args" cmd-alist))))
@@ -379,7 +383,8 @@ buffer, or closes it if there were none."
 
 (defun psc-ide-display-rebuild-message (error-type raw-message)
   "Take a parsed JSON error/warning and displays it in the rebuild buffer.
-ERROR-TYPE is either \"error\" or \"warning\" and gets displayed with the RAW-MESSAGE."
+ERROR-TYPE is either \"error\" or \"warning\" and gets displayed with
+the RAW-MESSAGE."
   (let ((msg (concat error-type ": " (psc-ide-pretty-json-error raw-message))))
     (progn
       (with-current-buffer (get-buffer-create "*psc-ide-rebuild*")

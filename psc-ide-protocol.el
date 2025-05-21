@@ -59,7 +59,8 @@ If supplied, SENTINEL is the process state sentinel callback."
 
 (defun psc-ide-wrap-callback (callback buffer current proc status)
   "Wraps a function that expects a parsed psc-ide response.
-Evaluates the CALLBACK in the context of the CURRENT buffer that initiated call if it still exists."
+Evaluates the CALLBACK in the context of the CURRENT buffer that
+initiated call if it still exists."
   (when (string= "closed" (process-status proc))
     (let ((parsed
            (with-current-buffer buffer
