@@ -72,12 +72,12 @@
   :group 'languages)
 
 (defcustom psc-ide-purs-executable "purs"
-  "Path to the 'purs' executable."
+  "Path to the `purs' executable."
   :group 'psc-ide
   :type  'string)
 
 (defcustom psc-ide-use-npm-bin nil
-  "Whether to use 'npm bin' to determine the location of binaries.
+  "Whether to use `npm bin' to determine the location of binaries.
 This includes the ide server and package manager binaries like spago."
   :group 'psc-ide
   :type  'boolean)
@@ -227,7 +227,7 @@ COMMAND, ARG and IGNORED correspond to the standard company backend API."
                                         (list (get-text-property 0 :module arg))))))))))
 
 (defun psc-ide-server-start (root)
-  "Start 'psc-ide-server' in the ROOT directory and load all modules."
+  "Start `psc-ide-server' in the ROOT directory and load all modules."
   (interactive (list (read-directory-name "Project root: " (psc-ide-suggest-project-dir))))
   (let ((default-directory root))
     (psc-ide-server-start-impl root (unless psc-ide-force-user-globs
@@ -235,7 +235,7 @@ COMMAND, ARG and IGNORED correspond to the standard company backend API."
   (run-at-time "1 sec" nil 'psc-ide-load-all))
 
 (defun psc-ide-server-quit ()
-  "Quit 'psc-ide-server'."
+  "Quit `psc-ide-server'."
   (interactive)
   (psc-ide-send-sync psc-ide-command-quit))
 
@@ -491,7 +491,7 @@ This is updated by `psc-ide-server-running-p'.")
     running))
 
 (defun psc-ide-server-command (dir-name &optional globs)
-  "Build a shell command to start 'purs ide' in directory DIR-NAME.
+  "Build a shell command to start `purs ide' in directory DIR-NAME.
 Tries to find the purs executable and builds up the command by
 appending eventual options.  Returns a list that can be expanded
 and passed to `start-process`.
