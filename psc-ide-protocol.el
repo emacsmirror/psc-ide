@@ -29,7 +29,7 @@ If supplied, SENTINEL is the process state sentinel callback."
 
 (defun psc-ide-send-sync (cmd)
   (with-temp-buffer
-    (condition-case err
+    (condition-case nil
         (let ((proc (psc-ide--connect (current-buffer))))
           (process-send-string proc (s-prepend cmd "\n"))
 
@@ -48,7 +48,7 @@ If supplied, SENTINEL is the process state sentinel callback."
 
 (defun psc-ide-send (cmd callback)
   (let ((buffer (generate-new-buffer "*psc-ide-network-proc*")))
-    (condition-case err
+    (condition-case nil
         (let ((proc (psc-ide--connect buffer (apply-partially 'psc-ide-wrap-callback callback buffer (current-buffer)))))
           (process-send-string proc (s-prepend cmd "\n")))
       ;; Catch all the errors that happen when trying to connect
