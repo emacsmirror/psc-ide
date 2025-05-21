@@ -57,7 +57,7 @@ If supplied, SENTINEL is the process state sentinel callback."
          (kill-buffer buffer)
          (error "Couldn't connect to IDE server: you can start it using psc-ide-server-start."))))))
 
-(defun psc-ide-wrap-callback (callback buffer current proc status)
+(defun psc-ide-wrap-callback (callback buffer current proc _status)
   "Wraps a function that expects a parsed psc-ide response.
 Evaluates the CALLBACK in the context of the CURRENT buffer that
 initiated call if it still exists."

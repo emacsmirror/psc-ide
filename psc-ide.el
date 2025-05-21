@@ -183,7 +183,7 @@ just JS output"
   (require 'psc-ide-flycheck)
   (psc-ide-flycheck-setup))
 
-(defun company-psc-ide-backend (command &optional arg &rest ignored)
+(defun company-psc-ide-backend (command &optional arg &rest _ignored)
   "The psc-ide backend for `company-mode'.
 COMMAND, ARG and IGNORED correspond to the standard company backend API."
   (interactive (list 'interactive))
