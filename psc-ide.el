@@ -782,7 +782,9 @@ on whether WARN is true.  Optionally EXPANDs type synonyms."
 
 (defun psc-ide-suggest-project-dir ()
   "Suggest a project directory to start the ide server in."
-  (if (and (fboundp 'projectile-project-root) (projectile-project-p))
+  (if (and (fboundp 'projectile-project-root)
+           (fboundp 'projectile-project-p)
+           (projectile-project-p))
       (projectile-project-root)
     default-directory))
 
