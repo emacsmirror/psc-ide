@@ -29,7 +29,7 @@ If supplied, SENTINEL is the process state sentinel callback."
 
 (defun psc-ide-send-sync (cmd)
   (with-temp-buffer
-    (condition-case err
+    (condition-case nil
         (let ((proc (psc-ide--connect (current-buffer))))
           (process-send-string proc (s-prepend cmd "\n"))
 
@@ -48,7 +48,7 @@ If supplied, SENTINEL is the process state sentinel callback."
 
 (defun psc-ide-send (cmd callback)
   (let ((buffer (generate-new-buffer "*psc-ide-network-proc*")))
-    (condition-case err
+    (condition-case nil
         (let ((proc (psc-ide--connect buffer (apply-partially 'psc-ide-wrap-callback callback buffer (current-buffer)))))
           (process-send-string proc (s-prepend cmd "\n")))
       ;; Catch all the errors that happen when trying to connect
@@ -57,9 +57,10 @@ If supplied, SENTINEL is the process state sentinel callback."
          (kill-buffer buffer)
          (error "Couldn't connect to IDE server: you can start it using psc-ide-server-start."))))))
 
-(defun psc-ide-wrap-callback (callback buffer current proc status)
+(defun psc-ide-wrap-callback (callback buffer current proc _status)
   "Wraps a function that expects a parsed psc-ide response.
-Evaluates the CALLBACK in the context of the CURRENT buffer that initiated call if it still exists."
+Evaluates the CALLBACK in the context of the CURRENT buffer that
+initiated call if it still exists."
   (when (string= "closed" (process-status proc))
     (let ((parsed
            (with-current-buffer buffer
